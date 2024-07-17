@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groove Guru - Get Started</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #e0fbfc;
+            background-image: url('https://eskipaper.com/images/vinyl-wallpaper-25.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #090808; /* Background color for the header */
+            padding: 10px 0; /* Padding around the header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        .logo {
+            margin-left: 20px; /* Adjust margin for the logo */
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            color: #f7f1f1;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            margin: 0; /* Remove default margin */
+        }
+        
+        .logo span {
+            color: #ff0000;
+        }
+
+        .nav-links ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style-type: none;
+            gap: 50px;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .nav-links ul li a {
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: #ecdbdb;
+            transition: 0.4s;
+            padding: 10px 15px; /* Padding around each link */
+        }
+
+        .nav-links ul li a:hover {
+            color: #ff0000;
+            font-size: 30px;
+        }
+
+        .get-started-container {
+            margin-top: 80px; /* Adjust margin to push content below the fixed header */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); /* Adjust height to fit remaining viewport */
+        }
+
+        .text-box-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .text-box {
+            text-align: center;
+            font-size: 24px;
+            max-width: 300px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .option-box {
+            padding: 20px 30px;
+            color: #fff1f1;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            background: #ff0000;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            transition: 0.4s;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .option-box:hover {
+            scale: 120%;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+                        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1><b>Groove<span>Guru</span></b></h1>
+            </div>
+
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="genre_classification.html">Genre</a></li>
+                    <li><a href="genre_recommendation.html">Recommendation</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Statistics</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="get-started-container">
+            <div class="text-box-container">
+                <div class="text-box">
+                    <h3>Discover Your Perfect Sound: Let Frequency and Rhythm Guide Your Next Favorite Track!</h3>
+                </div>
+                <div class="text-box">
+                    <h3>Explore music for every mood—from fiery beats to soothing melodies!</h3>
+                </div>
+            </div>
+            <div class="button-container">
+                <div class="option-box">
+                    <a href="{% url 'genre_classification' %}" style="color: white; text-decoration: none;">Genre Classification</a>
+                </div>
+                <div class="option-box">
+                    <a href="{% url 'genre_recommendation' %}"style="color: white; text-decoration: none;">Genre Recommendation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

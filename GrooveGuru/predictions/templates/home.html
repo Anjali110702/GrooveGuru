@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <title>Groove Guru Home Page</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+         
+        body {
+            background-image: url('https://wallpaper.forfun.com/fetch/f2/f22cc3e40ad17628d22b4f05b2963abd.jpeg');
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #e0fbfc;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #090808; /* Background color for the header */
+            padding: 5px 0; /* Padding around the header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            color:#eff3f3;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+        }
+        
+        .logo span {
+            color: #ff0000;
+        }
+        
+        .container {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .nav-links ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style-type: none;
+            gap: 50px;
+        }
+
+        .nav-links ul li a {
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: #e0fbfc;
+            transition: 0.4s;
+            padding: 10px 15px;
+        }
+
+        .nav-links ul li a:hover {
+            color: #ff0000;
+            font-size: 30px;
+        }
+
+        .btn {
+            padding: 20px 30px;
+            color: #fff1f1;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            background: #ff0000;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            transition: 0.4s;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 18px; /* Added font-size property */
+        }
+
+        .btn-primary {
+            margin-left: 100px;
+            margin-bottom: 20px;
+            color: #000307;
+            background: #000808;
+        }
+
+        .btn:hover {
+            scale: 120%;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+                        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        }
+
+        .main-content {
+            width: 100%;
+            height: 100%;
+            margin-top: 70px; /* Added margin-top property */
+        }
+
+        .main {
+            position: relative;
+            width: 1400px;
+            height: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .line {
+            width: 80px;
+            border-bottom: 8px solid #ff0000;
+            margin-bottom: 30px;
+        }
+
+        .main h1 {
+            text-transform: uppercase;
+            font-size: 50px;
+            color: #ede8e8;
+            line-height: 1;
+        }
+
+        .main h2 {
+            font-size: 40px;
+            color: #e7ecef;
+            margin-bottom: 50px;
+        }
+
+        .main span {
+            color: #ff0000 ;
+        }
+
+        .main p {
+            width: 800px;
+            font-size: 28px;
+            color: #ecf2f2;
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes anim {
+            0% {
+                top: 0;
+            }
+            50% {
+                top: -10px;
+            }
+            100% {
+                top: 0;
+            }
+        }
+
+        .image img {
+            margin-top: -79px;
+            margin-left: 5px;
+            width: 100%;
+            scale: 140%;
+        }
+        
+        .block {
+            width: 45%;
+            margin-bottom: 30px;
+        }
+
+        .block iframe {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .block h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .block p {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer-links {
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>Groove<span>Guru</span></h1>
+            </div>
+
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'genre_classification' %}">Genre</a></li>
+                    <li><a href="{% url 'genre_recommendation' %}">Recommendation</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="main-content">
+            <div class="main">
+                <div class="left">
+                    <br>
+                    <div class="line"></div>
+                    <h1>Discover Your Soundtrack</h1>
+                    <h2><span class="auto-type"></span></h2>
+                    <p>Music Classification and Recommendation System</p>
+                    <a href="{% url 'get_started' %}" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+            <p>Groove Guru - Music Genre Classification and Recommendation System</p>
+            <div class="footer-links">
+    </footer>
+    
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed(".auto-type", {
+            strings: ["Tune Your Taste", "Rhythm and Recognition", "Music Magic, Matched"],
+            typeSpeed: 150,
+            backSpeed: 150,
+            loop: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Recommendations</title>
+    <style>
+        @keyframes fadeInBackground {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://i.pinimg.com/564x/30/2c/d1/302cd12f25a83723602eb0051aca0241.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: fadeInBackground 1.5s ease-in-out;
+        }
+
+        .recommendations-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid #000000;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .song-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .btn {
+            padding: 20px 30px;
+            color: #fff1f1;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            background: #ff0000;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            transition: 0.4s;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .btn-primary {
+            margin-left: 100px;
+            margin-bottom: 20px;
+            color: #000307;
+            background: #000808;
+        }
+
+        .btn:hover {
+            scale: 120%;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+                        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="recommendations-container">
+        <h1>Recommended Songs</h1>
+        {% if recommended_songs %}
+            <ul>
+                {% for song in recommended_songs %}
+                    <center><li class="song-item">{{ song.title }} by {{ song.artist }}</li></center>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recommendations available for this genre.</p>
+        {% endif %}
+        <center><a href="{% url 'genre_classification' %}" class="btn">Classify Another Song</a></center>
+    </div>
+</body>
+</html>
