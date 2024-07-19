@@ -1,117 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Recommendations</title>
-    <style>
-        @keyframes fadeInBackground {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+import pickle
+from django.shortcuts import render,redirect
+from .forms import AudioFileForm
+from .models import AudioFile
+import librosa
+import numpy as np
 
-        @keyframes slideIn {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-image: url('https://i.pinimg.com/564x/30/2c/d1/302cd12f25a83723602eb0051aca0241.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            animation: fadeInBackground 1.5s ease-in-out;
-        }
+# Load the models and scaler
+models = pickle.load(open('D:/test/predictions/models.p', 'rb'))
 
-        .recommendations-container {
-            width: 80%;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 2px solid #000000;
-            border-radius: 10px;
-            background-color: #ffffff;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-        }
+# Verify the keys to match the saved model
+print(models.keys())  # Ensure this outputs 'norma', 'svmp', and 'lgn'
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+scaler = models.get('norma')
+knn_best = models.get('svmp')
+svm_best = models.get('svmp')  # Assuming 'svmp' is also used for SVM in your case
+lookup_genre_name = models.get('lgn')
+def index(request):
+    return render(request, 'home.html')
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+def get_metadata(file_path):
+    y, sr = librosa.load(file_path, sr=None)
+    mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=27)
+    mfccs_mean = np.mean(mfccs.T, axis=0)
+    return mfccs_mean
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
-        .song-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            animation: slideIn 0.5s ease-in-out;
-        }
+def upload_audio(request):
+    if request.method == 'POST':
+        form = AudioFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            audio_file = form.save()
+            audio_features = get_metadata(audio_file.file.path)
+            
+            if scaler is None:
+                return render(request, 'genre_output.html', {'form': form, 'error': 'Scaler model is not loaded correctly.'})
+            
+            audio_features_scaled = scaler.transform([audio_features])
 
-        .song-link {
-            display: block;
-            color: #1a0dab;
-            text-decoration: none;
-            margin-top: 5px;
-        }
+            genre_prediction_knn = knn_best.predict(audio_features_scaled)
+            genre_prediction_svm = svm_best.predict(audio_features_scaled)
 
-        .btn {
-            padding: 10px 20px;
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            text-decoration: none;
-            background: #007bff;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
-                        rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
-                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-            transition: 0.4s;
-            font-weight: 600;
-            font-size: 16px;
-            margin: 20px auto;
-        }
+            genre = lookup_genre_name[genre_prediction_svm[0]]  # Assuming you want to use SVM prediction
 
-        .btn:hover {
-            transform: scale(1.1);
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-                        rgba(0, 0, 0, 0.22) 0px 10px 10px;
-        }
+            # Render the genre result page with the prediction and genre
+            context = {'svm_prediction': genre, 'redirect_url': reverse('recommend_songs', args=[genre])}
+            return render(request, 'genre_output.html', context)
+    else:
+        form = AudioFileForm()
+    return render(request, 'genre_output.html', {'form': form})
 
-        .center {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="recommendations-container">
-        <h1>Recommended Songs</h1>
-        {% if recommended_songs %}
-            <ul>
-                {% for song in recommended_songs %}
-                    <li class="song-item">
-                        <div class="center">{{ song.title }} by {{ song.artist }}</div>
-                        <a href="{{ song.youtube_link }}" target="_blank" class="song-link">Watch on YouTube</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No recommendations available for this genre.</p>
-        {% endif %}
-        <div class="center">
-            <a href="{% url 'genre_classification' %}" class="btn">Classify Another Song</a>
-        </div>
-    </div>
-</body>
-</html>
+
+def home(request):
+    return render(request, 'home.html')
+
+def genre_classification(request):
+    return render(request, 'genre_classification.html')
+
+def genre_recommendation(request):
+    return render(request, 'genre_recommendation.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def statistics(request):
+    return render(request,'statistics.html')
+
+def get_started(request):
+    return render(request, 'get_started.html')
+# views.py
+from django.shortcuts import render
+from .models import AudioFile, SongRecommendation  # Assuming you have a model for recommendations
+
+# Add the existing functions and imports
+
+def recommend_songs(request, genre):
+    # Fetch the recommended songs for the given genre
+    recommended_songs = SongRecommendation.objects.filter(genre=genre)[:5]
+    
+    context = {
+        'recommended_songs': recommended_songs
+    }
+    return render(request, 'song_recommendations.html', context)
+

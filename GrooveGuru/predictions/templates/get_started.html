@@ -143,11 +143,8 @@
 
             <div class="nav-links">
                 <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="genre_classification.html">Genre</a></li>
-                    <li><a href="genre_recommendation.html">Recommendation</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Statistics</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
                 </ul>
             </div>
         </header>
@@ -157,17 +154,13 @@
                 <div class="text-box">
                     <h3>Discover Your Perfect Sound: Let Frequency and Rhythm Guide Your Next Favorite Track!</h3>
                 </div>
-                <div class="text-box">
-                    <h3>Explore music for every mood—from fiery beats to soothing melodies!</h3>
-                </div>
+                
             </div>
             <div class="button-container">
                 <div class="option-box">
                     <a href="{% url 'genre_classification' %}" style="color: white; text-decoration: none;">Genre Classification</a>
                 </div>
-                <div class="option-box">
-                    <a href="{% url 'genre_recommendation' %}"style="color: white; text-decoration: none;">Genre Recommendation</a>
-                </div>
+                
             </div>
         </div>
     </div>

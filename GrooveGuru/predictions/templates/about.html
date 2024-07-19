@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groove Guru - About </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #e0fbfc;
+            background-image: url('https://eskipaper.com/images/vinyl-wallpaper-25.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            overflow-y: auto; /* Add this line */
+        }
+
+        .header {
+            width: 100%;
+            background-color: #090808; /* Background color for the header */
+            padding: 10px 0; /* Padding around the header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        .logo {
+            margin-left: 20px; /* Adjust margin for the logo */
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            color: #f7f1f1;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            margin: 0; /* Remove default margin */
+        }
+        
+        .logo span {
+            color: #ff0000;
+        }
+
+        .nav-links ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style-type: none;
+            gap: 50px;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .nav-links ul li a {
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: #ecdbdb;
+            transition: 0.4s;
+            padding: 10px 15px; /* Padding around each link */
+        }
+
+        .nav-links ul li a:hover {
+            color: #ff0000;
+            font-size: 30px;
+        }
+
+        .get-started-container {
+            margin-top: 80px; /* Adjust margin to push content below the fixed header */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); /* Adjust height to fit remaining viewport */
+        }
+
+        .text-box-container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .text-box {
+            text-align: left;
+            font-size: 24px;
+            max-width: 800px; /* Adjusted max-width */
+            width: 100%; /* Make the text-box take full width */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin: 0 auto; /* Center horizontally */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .option-box {
+            padding: 20px 30px;
+            color: #fff1f1;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            background: #ff0000;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            transition: 0.4s;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .option-box:hover {
+            scale: 120%;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+                        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        }
+
+        .About-section{
+            padding: 50px;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: calc(100vh - 50px); /* Adjust height to fit remaining viewport */
+        }
+
+        .About-section h2 {
+            font-size: 36px;
+            color: black; /* Set the heading color to black */
+            margin-bottom: 20px;
+            text-align: center; /* Center heading text */
+            width: 100%;
+        }
+
+        .About-section p, .About-team p {
+            font-size: 24px;
+            color: #ffeded;
+            line-height: 1.6;
+        }
+
+        .About-section img, .About-team img {
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .About-content, .Box-content {
+            display: flex;
+            justify-content: space-around; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            flex-direction: column; /* Stack heading and text box */
+            color: #f7f1f1;
+        }
+
+        
+
+        .About-team {
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Add this line */
+        }
+        
+        .About-team h2 {
+            font-size: 36px;
+            color: black;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .About-team p {
+            font-size: 24px;
+            color: #ffeded;
+            line-height: 1.6;
+        }
+        
+        
+        .Box-content {
+            display: flex;
+            justify-content: space-between; /* Change from space-around to space-between */
+            align-items: center;
+            flex-direction: row; /* Change from column to row */
+            color: #f7f1f1;
+            flex-wrap: wrap; /* Add this line to wrap the boxes to the next line if necessary */
+            text-align: center;
+        }
+        
+        .Box {
+            width: 23%; /* Set a fixed width for the boxes */
+            margin: 10px; /* Add some margin to separate the boxes */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            color: #e0fbfc;
+            text-align: center;
+
+        }
+
+        .last-box {
+            width: 23%; /* Set the width to 100% to center the box */
+            margin: 10px auto; /* Add margin to separate from the above boxes */
+            text-align: center; /* Center the text inside the box */
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .footer-links {
+            margin-top: 10px;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1 style="color:white;"><b>Groove<span>Guru</span></b></h1>
+            </div>
+
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'genre_classification' %}">Genre</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="About-section">
+            <div class="About-content">
+                <h2 style="color:white">About Groove Guru</h2>
+                <div class="text-box">
+                    <p style="text-align:justify" >Trains models to recognize patterns in music genres.Offers a user-friendly interface for file uploading, genre classification, and personalized recommendations.Uses models like K-Nearest Neighbors, Support Vector Machine, Random Forest, Gradient Boosting, and Neural Networks.
+                     Utilizes audio feature extraction methods to analyze music files.Uses Librosa for feature extraction from audio files. Utilizes Python libraries for audio processing and machine learning.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="About-team">
+            <div class="Box-content">
+                <h2 style="color:white">Our Team</h2>
+                <div class="Box">
+                    <p>Aditi Das <br> USN - 1AY21CS014</p>
+                </div>
+                <div class="Box">
+                    <p>Anjali K S <br> USN - 1AY21CS029</p>
+                </div>
+                <div class="Box">
+                    <p>Bhavana B Hallikeri <br> USN - 1AY21CS040</p>
+                </div>
+                <div class="Box last-box">
+                    <p>Deepa Tendulkar<br> USN - 1AY21CS051</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Groove Guru - Music Classification and Recommendation System</p>
+            <div class="footer-links">
+        </footer>
+
+
+
+    </div>
+</body>
+</html>

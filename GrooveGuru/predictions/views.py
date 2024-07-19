@@ -7,7 +7,7 @@ import numpy as np
 
 
 # Load the models and scaler
-models = pickle.load(open('C:/Desktop/MiniProject/audiogenre/predictions/models.p', 'rb'))
+models = pickle.load(open('D:/test/predictions/models.p', 'rb'))
 
 # Verify the keys to match the saved model
 print(models.keys())  # Ensure this outputs 'norma', 'svmp', and 'lgn'
