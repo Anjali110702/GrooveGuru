@@ -38,6 +38,7 @@
             border: 2px solid #000000;
             border-radius: 10px;
             background-color: #ffffff;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
         }
 
         h1 {
@@ -58,34 +59,38 @@
             animation: slideIn 0.5s ease-in-out;
         }
 
+        .song-link {
+            display: block;
+            color: #1a0dab;
+            text-decoration: none;
+            margin-top: 5px;
+        }
+
         .btn {
-            padding: 20px 30px;
-            color: #fff1f1;
+            padding: 10px 20px;
+            color: #fff;
             cursor: pointer;
             display: inline-block;
             text-decoration: none;
-            background: #ff0000;
-            border-radius: 30px;
+            background: #007bff;
+            border-radius: 5px;
             box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
                         rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
                         rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
             transition: 0.4s;
             font-weight: 600;
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        .btn-primary {
-            margin-left: 100px;
-            margin-bottom: 20px;
-            color: #000307;
-            background: #000808;
+            font-size: 16px;
+            margin: 20px auto;
         }
 
         .btn:hover {
-            scale: 120%;
+            transform: scale(1.1);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
                         rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        }
+
+        .center {
+            text-align: center;
         }
     </style>
 </head>
@@ -95,13 +100,18 @@
         {% if recommended_songs %}
             <ul>
                 {% for song in recommended_songs %}
-                    <center><li class="song-item">{{ song.title }} by {{ song.artist }}</li></center>
+                    <li class="song-item">
+                        <div class="center">{{ song.title }} by {{ song.artist }}</div>
+                        <a href="{{ song.youtube_link }}" target="_blank" class="song-link">Watch on YouTube</a>
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
             <p>No recommendations available for this genre.</p>
         {% endif %}
-        <center><a href="{% url 'genre_classification' %}" class="btn">Classify Another Song</a></center>
+        <div class="center">
+            <a href="{% url 'genre_classification' %}" class="btn">Classify Another Song</a>
+        </div>
     </div>
 </body>
 </html>
