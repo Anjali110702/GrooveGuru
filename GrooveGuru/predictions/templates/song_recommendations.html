@@ -96,6 +96,7 @@
             <ul>
                 {% for song in recommended_songs %}
                     <center><li class="song-item">{{ song.title }} by {{ song.artist }} </li></center>
+                    <a href="{{ song.youtube_link }}" target="_blank">Watch on YouTube</a>
                 {% endfor %}
             </ul>
         {% else %}

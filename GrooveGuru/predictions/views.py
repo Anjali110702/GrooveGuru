@@ -7,7 +7,7 @@ import numpy as np
 
 
 # Load the models and scaler
-models = pickle.load(open('C:/Users/Admin/OneDrive/Documents/Groovee/GrooveGuru/GrooveGuru/predictions/models.p', 'rb'))
+models = pickle.load(open('C:/Users/tendu/GrooveGuru/GrooveGuru/predictions/models.p', 'rb'))
 
 # Verify the keys to match the saved model
 print(models.keys())  # Ensure this outputs 'norma', 'svmp', and 'lgn'
